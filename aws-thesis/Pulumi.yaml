@@ -1,0 +1,42 @@
+name: ${PROJECT}
+description: ${DESCRIPTION}
+
+runtime: nodejs
+  
+template:
+  description: Architecture implementation
+  config:
+    aws:region:  
+      description: Name of the region of AWS
+      default: eu-south-1
+    vpcName: 
+      description: Give the name of your vpc
+      default: davide-manca-vpc
+    vpcNetworkCidr:
+      description: Give the address space of your vpc
+      default: 10.0.0.0/16
+    firstPublicSubnetName:
+      description: Enter the name of the first public subnet
+      default: davide-manca-first-public-subnet
+    firstPublicSubnetCidr:
+      description: Provide the cidr of the first public subnet
+      default: 10.0.16.0/20
+    secondPublicSubnetName:
+      description: Enter the name of the second public subnet
+      default: davide-manca-second-public-subnet
+    secondPublicSubnetCidr:
+      description: Provide the cidr of the second public subnet
+      default: 10.0.32.0/20
+    firstPrivateSubnetName:
+      description: Enter the name of the first private subnet
+      default: davide-manca-first-private-subnet
+    firstPrivateSubnetCidr:
+      description: Provide the cidr of the first private subnet
+      default: 10.0.48.0/20
+    secondPrivateSubnetName:
+      description: Enter the name of the second private subnet
+      default: davide-manca-second-private-subnet
+    secondPrivateSubnetCidr:
+      description: Provide the cidr of the second private subnet
+      default: 10.0.64.0/20
+    
