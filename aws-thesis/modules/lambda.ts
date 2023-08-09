@@ -130,11 +130,16 @@ class Lambda{
         return action
     }
 
-    public createEventTarget(name: string, rule: pulumi.Output<string>, lambdaArn: pulumi.Output<string>, resources: any[]){
+    public createEventTarget(
+        name: string, 
+        rule: pulumi.Output<string>, 
+        lambdaArn: pulumi.Output<string>, 
+        eventRule: aws.cloudwatch.EventRule,
+        resources: any[]){
         const eventTarget = new aws.cloudwatch.EventTarget(name, {
             rule: rule,
             arn: lambdaArn,
-        });
+        }, {dependsOn: eventRule});
         resources.push({type: eventTarget.urn, name: pulumi.output(name), id: pulumi.all([eventTarget.eventBusName, eventTarget.rule, eventTarget.targetId]).apply(([busName, ruleName, targetId]) => busName!.concat("/").concat(ruleName).concat("/").concat(targetId))})
         return eventTarget
     }
