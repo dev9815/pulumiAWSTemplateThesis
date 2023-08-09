@@ -11,6 +11,6 @@ else
 		pulumi destroy --yes
 	done
 	if [ -e ./import/resources.json ]; then
-		rm -r ./import/*
+		rm -f ./import/resources.json
 	fi
 fi
