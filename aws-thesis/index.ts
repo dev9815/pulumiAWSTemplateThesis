@@ -96,8 +96,8 @@ if(pulumi.getStack() !== "import-resources"){
     const stopRDSInstance = rdsLambda.createLambdaFunction("davide-manca-stopLambda", lambdaRole.arn, "stop", rdsInstance.id.apply(id => id), stackResources)
     const startRule = rdsLambda.scheduleAction("davide-manca-startRDS-rule", "cron(0 7 ? * MON-FRI *)", stackResources)
     const stopRule = rdsLambda.scheduleAction("davide-manca-stopRDS-rule", "cron(0 17 ? * MON-FRI *)", stackResources)
-    const startEventTarget = rdsLambda.createEventTarget("davide-manca-startRDS-eventTarget", startRule.name, startRDSInstance.arn, stackResources)
-    const stopEventTarget = rdsLambda.createEventTarget("davide-manca-stopRDS-eventTarget", stopRule.name, stopRDSInstance.arn, stackResources)
+    const startEventTarget = rdsLambda.createEventTarget("davide-manca-startRDS-eventTarget", startRule.name, startRDSInstance.arn, startRule, stackResources)
+    const stopEventTarget = rdsLambda.createEventTarget("davide-manca-stopRDS-eventTarget", stopRule.name, stopRDSInstance.arn, stopRule, stackResources)
     const startPermission = rdsLambda.createPermission("davide-manca-permission-startRule","lambda:InvokeFunction", "events.amazonaws.com", startRule.arn,startRDSInstance.id, stackResources)
     const stopPermission = rdsLambda.createPermission("davide-manca-permission-stopRule","lambda:InvokeFunction", "events.amazonaws.com", stopRule.arn, stopRDSInstance.id, stackResources)
 
